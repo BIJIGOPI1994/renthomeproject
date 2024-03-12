@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div>
+  <img src="{% static 'img/slide-about-1.jpg' %}" style=height="300px" width="100%">
+</div><br>
+
+    <div class="row" style="background:black;">
+      {% for i in c %}
+        <div class="col-md-4" style="margin-bottom:100px"><div class="card ms-5 me-5" style="width:400px;height:460px">
+            <center>
+              <img style="height:300px; width:400px;" src="{{i.image.url}}" class="card-img-top mt-1" alt="">
+            </center>
+            <div class="card-body">
+              <center>
+              <h5 class="card-title" style="...">{{i.name}}</h5>
+              
+              <p style=".." class="card-text">{{i.dese}}</p>
+            
+              <a href="{% url 'renthome:allproperty' i.name %}" class="btn btn-primary"style="font-weight:bold">Booking</a>
+              </center>
+            </div>
+          </div></div>
+
+          {% endfor %}
+          
+                    </div>
+                  </div>
+
+{% endblock %}
+
+
+
+

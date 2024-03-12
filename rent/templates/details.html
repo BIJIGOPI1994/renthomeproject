@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container m-5" style="margin-bottom:60px;margin-left:100px; padding:100px;">
+    <div class="row">
+        <div class="col-sm-4"><img src="{{p.image.url}}" height="300px" width="370px"></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <div class="col-sm-5">&nbsp;&nbsp;
+            <h4>{{p.name}}</h>
+                <h4>{{p.price}}</h>
+                    <p style="text-indent:20px;line-height:2;text-align:justify">{{p.desc}}</p>
+                
+                <h4><a href="{% url 'book:addtobook' p.name %}" class="btn btn-secondary mt-4">Booking</a></h4>
+        </div>
+    </div>
+{% endblock %}
+         

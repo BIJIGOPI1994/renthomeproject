@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+{% if not b %}
+<div class="container mt-8">
+<h3 class="text-center">Booking is Empty</h3>
+<h5 class="text-center text-success mt-5"><a href="{% url 'realshop:allcat' %}">Continue Shopping</a></h5>
+</div>
+
+
+{% else %}
+<div class="container-fluid mt-5">
+<div class="row">
+    <h4 class="text-center mt-5">Shopping items</h4>
+
+    <div class="col-sm-6">
+        <table class="table table-bordered">
+        <tr>
+            <th colspan="5" class="text-center" >Booking Items</th>
+        </tr>
+        {% for i in b %}
+        <tr>
+            <td><img src="{{i.property.image.url}}" height="200px" width="200px"></td>
+            <td><b>{{i.property.name}}</b></td>
+            <td><b>Property id:{{i.property.id}}</b><br>
+            <b>Unit Price:{{i.property.price}}</b><br>
+            <b>Quantity:{{i.quantity}}*{{i.property.price}}</b></td>
+            <td><b>SubTotal:{{i.subtotal}}</b></td>
+            
+        
+            
+ <td>
+            {% if i.quantity < i.property.stock %}
+                <a href="{% url 'book:addtobook' i.property.name %}"><i style="color:black;font-size:20px;" class="fa-regular fa-plus"></i></a>
+                <a href="{% url 'book:book_remove' i.property.name %}"><i style="color:black;font-size:20px;" class="fa-sharp fa-solid fa-minus"></i></a>
+                <a href="{% url 'book:full_remove' i.property.name %}"><i style="color:black;font-size:20px;"  class="fa-sharp fa-solid fa-trash"></i></a></td>
+            {% else %}
+                <a href="{% url 'book:book_remove' i.property.name %}"><i style="color:black;font-size:20px;" class="fa-sharp fa-solid fa-minus"></i></a>
+                <a href="{% url 'book:full_remove' i.property.name %}"><i style="color:black;font-size:20px;"  class="fa-sharp fa-solid fa-trash"></i></a></td>
+            </tr>
+            {% endif %}
+    {% endfor %}
+    </table>
+    </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <div class="col-sm-4 mt-6">
+        <table class="table table-bordered">
+        <tr><th colspan="4" class="text-center mt-5">Check Out</th></tr>
+    <tr><td class="text-center"><b>Total: <span class="text-danger">{{total}}</span></b></td></tr>
+    </table>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="{% url 'book:orderform' %}" class="btn btn-danger text-dark"><b>Booking Confirm</b></a>
+    <a href="{% url 'renthome:allcat' %}" class="btn btn-danger text-dark"><b>Continue Shopping</b></a>
+    </div>
+    </div>
+
+</div>
+</div>
+{% endif %}
+{% endblock %}
